@@ -1,0 +1,61 @@
+<p class="h1">Questionnaire</p>
+<form *ngIf='elements' [formGroup]="questonnaireForm">
+  <div formArrayName="elements" class="container">
+    <button type="submit" class="btn btn-primary" (click)='createObject()'>Create Object</button>
+    <div class="teams" *ngFor="
+        let elm of elements;let elmIndex = index">
+      <div *ngIf='elm.type === "group"'>
+        <div class="form-group">
+          <label class="col-sm-12 col-form-label">
+            <h2>{{elmIndex+1}}-{{elm.text}}</h2>
+          </label>
+        </div>
+        <div *ngFor="let arrayItem2 of elm.item; let j=index">
+          <div class="form-group">
+            <label [for]="arrayItem2.linkId" class="col-sm-12 col-form-label">
+              <h4>{{elmIndex+1}}.{{j+1}}-{{arrayItem2.text}}</h4>
+            </label>
+            <div *ngIf='arrayItem2.type === "boolean"' class="form-check">
+              <input [id]="arrayItem2.linkId" class="form-check-input" type="checkbox"
+                [formControl]="getNestedElementControl(elmIndex,j,elm.linkId,arrayItem2.linkId)">
+              <label class="form-check-label" [for]="arrayItem2.linkId">Yes</label>
+            </div>
+            <input *ngIf='arrayItem2.type === "string"' class="form-control" [id]="arrayItem2.linkId" type="text"
+              placeholder="Enter answer"
+              [formControl]="getNestedElementControl(elmIndex,j,elm.linkId,arrayItem2.linkId)">
+            <input *ngIf='arrayItem2.type === "date"' type="date" placeholder="Enter answer" class="form-control"
+              [id]="arrayItem2.linkId" [formControl]="getNestedElementControl(elmIndex,j,elm.linkId,arrayItem2.linkId)">
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="isSubmitted && getNestedElementControl(elmIndex,j,elm.linkId,arrayItem2.linkId)?.errors?.required"
+            role="alert">
+            Required field
+          </div>
+        </div>
+      </div>
+      <div *ngIf='elm.type !== "group"'>
+        <div class="form-group">
+          <label [for]="elm.linkId" class="col-sm-12 col-form-label">
+            <h4>{{elmIndex+1}}-{{elm.text}}</h4>
+          </label>
+          <div *ngIf='elm.type === "boolean"' class="form-check">
+            <input *ngIf='elm.type === "boolean"' [id]="elm.linkId" class="form-check-input" type="checkbox"
+              [formControl]="getElementControl(elmIndex,elm.linkId)">
+            <label class="form-check-label" [for]="elm.linkId">Yes</label>
+          </div>
+
+          <input *ngIf='elm.type === "string"' class="form-control" [id]="elm.linkId" type="text"
+            placeholder="Enter answer" [formControl]="getElementControl(elmIndex,elm.linkId)">
+          <input *ngIf='elm.type === "date"' type="date" placeholder="Enter answer" class="form-control"
+            [formControl]="getElementControl(elmIndex,elm.linkId)">
+        </div>
+        <div class="alert alert-danger" *ngIf="isSubmitted && getElementControl(elmIndex,elm.linkId)?.errors?.required"
+          role="alert">
+          Required field
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<textarea name="" *ngIf='questionnaireResponse' [(ngModel)]='questionnaireResponse' id="myTextarea" cols="30"
+  rows="10"></textarea>

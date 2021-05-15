@@ -11,6 +11,9 @@ import { SearchFilter } from '../models/searchFilter';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
+  getQuestionnaireJson() {
+    return this.httpClient.get('../../assets/questionnaire.json');
+  }
   getPatients(): Observable<GetPatientsResponse> {
     return this.httpClient.get(environment.queryURI + '/Patient', {
       headers: this.getHeaders(),

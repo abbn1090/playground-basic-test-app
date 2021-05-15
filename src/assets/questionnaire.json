@@ -7,8 +7,7 @@
     "Patient"
   ],
   "date": "2010",
-  "item": [
-    {
+  "item": [{
       "linkId": "1",
       "text": "Do you have allergies?",
       "type": "boolean"
@@ -17,8 +16,7 @@
       "linkId": "2",
       "text": "General questions",
       "type": "group",
-      "item": [
-        {
+      "item": [{
           "linkId": "2.1",
           "text": "What is your gender?",
           "type": "string"
@@ -44,8 +42,7 @@
       "linkId": "3",
       "text": "Intoxications",
       "type": "group",
-      "item": [
-        {
+      "item": [{
           "linkId": "3.1",
           "text": "Do you smoke?",
           "type": "boolean"

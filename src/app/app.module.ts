@@ -1,3 +1,4 @@
+import { HomeComponent } from './components/home/home.component';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -10,13 +11,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSortModule } from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { QuestionnaireComponent } from './components/Questionnaire/Questionnaire.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, QuestionnaireComponent, HomeComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
